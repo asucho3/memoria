@@ -67,10 +67,10 @@ main {
 
 @keyframes winner {
   from {
-    transform: scale(1) rotate(-2deg);
+    transform: scale(1) rotate(-1.5deg);
   }
   to {
-    transform: scale(1.15) rotate(2deg);
+    transform: scale(1.05) rotate(1.5deg);
   }
 }
 
