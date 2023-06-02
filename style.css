@@ -159,3 +159,51 @@ main {
 .timer {
   font-size: 5rem;
 }
+
+/***************************************************************/
+/* Media queries for < 544px (phones) */
+/***************************************************************/
+
+@media (max-width: 34em) {
+  html {
+    font-size: 50%;
+  }
+  body {
+    height: 100vh;
+    position: relative;
+  }
+  main {
+    grid-template-columns: 1fr;
+    height: 90%;
+  }
+  .options {
+    position: absolute;
+    flex-direction: row;
+    left: 1.5rem;
+    bottom: 1rem;
+    font-size: 4rem;
+    gap: 0.5rem;
+  }
+  .options div {
+    padding: 1.5rem 3rem;
+  }
+  .game {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+  }
+  .cell {
+    width: 100%;
+    height: 100%;
+  }
+  .footer {
+    margin-top: 0;
+  }
+  .timer {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    text-align: end;
+    font-size: 5rem;
+  }
+}
