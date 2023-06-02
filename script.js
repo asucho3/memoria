@@ -1,5 +1,6 @@
 const game = document.querySelector('.game');
 const options = document.querySelector('.options');
+const timer = document.querySelector('.timer');
 
 let GAME_WIDTH = 4;
 let GAME_HEIGHT = 4;
@@ -106,6 +107,9 @@ const createCellArray = function () {
 
 // Handle the cell selection by the user
 const selectedCell = function (el) {
+  // Start the timer if it hasn't been activated yet
+  if (!interval) startTimer();
+
   // If the array is full, exit (because there is a 'wrong' animation in progress)
   // Also exit if this cell is 'ok' or 'wrong'
   if (selectedCellArr.length > 1) return;
@@ -190,14 +194,15 @@ const checkWinner = function () {
   return win;
 };
 
+// Clear the timer
+const clearTimer = function () {
+  clearInterval(interval);
+  interval = undefined;
+  timer.textContent = '00:00';
+};
+
 // Start the timer
 const startTimer = function () {
-  // Clear previous timer
-  clearInterval(interval);
-
-  const timer = document.querySelector('.timer');
-  timer.textContent = '00:00';
-
   // Begin the timer
   interval = setInterval(() => {
     // Check for win condition
@@ -236,6 +241,7 @@ const init = function (restart = false, changeSize) {
     game.style.gridTemplateRows = `repeat(${GAME_HEIGHT}, 1fr)`;
   }
 
+  clearTimer();
   game.classList.remove('winner');
   fillCharArr();
   emptyPositions();
@@ -243,7 +249,6 @@ const init = function (restart = false, changeSize) {
   createCellArray();
   generateMarkup();
   setCells();
-  startTimer();
 };
 
 // Options
