@@ -1,0 +1,161 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: sans-serif;
+}
+
+body {
+  user-select: none;
+}
+
+main {
+  background-color: #eee;
+  width: 100vw;
+  height: 90vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-content: center;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-self: end;
+  align-self: center;
+  margin-right: 7rem;
+  font-size: 4rem;
+}
+
+.options > div {
+  padding: 2rem;
+  background-color: #ffd7c2;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.options > div:hover {
+  background-color: #ffc1a0;
+}
+
+.game {
+  display: grid;
+  width: 80rem;
+  height: 80rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 2rem;
+  perspective: 50rem;
+}
+
+.game.winner .cell {
+  animation-name: winner;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes winner {
+  from {
+    transform: scale(1) rotate(-2deg);
+  }
+  to {
+    transform: scale(1.15) rotate(2deg);
+  }
+}
+
+.cell {
+  width: 80%;
+  height: 80%;
+  position: relative;
+  perspective: 25rem;
+
+  align-self: center;
+  justify-self: center;
+}
+
+.cell-front,
+.cell-back {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 1s;
+  background-color: #ff6d1f;
+  backface-visibility: hidden;
+}
+
+.cell-front {
+  transform: rotateY(0deg);
+}
+
+.cell-front:hover {
+  background-color: #f85700;
+  transform: scale(1.05) translateY(-0.5rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
+}
+
+.cell-back {
+  transform: rotateY(-180deg);
+  font-size: 4rem;
+  font-family: 'linea-basic-10' !important;
+  font-weight: 700;
+  background-color: rgba(255, 125, 3, 0.562);
+}
+
+.cell-back.selected {
+  background-color: #ffaf85;
+}
+
+/* .cell:hover .cell-front {
+  transform: rotateY(180deg);
+}
+
+.cell:hover .cell-back {
+  transform: rotateY(0deg);
+} */
+
+.selected + .cell-front,
+.ok + .cell-front,
+.wrong + .cell-front {
+  transform: rotateY(180deg) !important;
+}
+
+.selected,
+.ok,
+.wrong {
+  transform: rotateY(0deg) !important;
+}
+
+.ok {
+  background-color: green !important;
+}
+
+.wrong {
+  background-color: red !important;
+}
+
+.footer {
+  margin-top: 1rem;
+  width: 100%;
+  text-align: center;
+}
+
+.timer {
+  font-size: 5rem;
+}
