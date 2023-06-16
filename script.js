@@ -150,8 +150,18 @@ const selectedCell = function (el) {
   }
 };
 
-// Generate the markup and add event listeners to the DOM elements
+// callback for the 'click' event listeners in the 'game'
+const callBackFn = function (e) {
+  const parentCell = e.target.closest('.cell');
+  if (!parentCell) return;
+  selectedCell(parentCell.querySelector('.cell-back'));
+};
+
+// Generate the markup and add event listeners
 const generateMarkup = function () {
+  // remove previous event listener
+  game.removeEventListener('click', callBackFn);
+
   game.innerHTML = '';
   for (let i = 0; i < GAME_HEIGHT; i++) {
     for (let j = 0; j < GAME_WIDTH; j++) {
@@ -164,16 +174,12 @@ const generateMarkup = function () {
       game.insertAdjacentHTML('beforeend', newCell);
     }
   }
-  const allCells = document.querySelectorAll('.cell');
 
-  allCells.forEach((el) =>
-    el.addEventListener('click', function (e) {
-      selectedCell(e.target.closest('.cell').querySelector('.cell-back'));
-    })
-  );
+  // add the event listener
+  game.addEventListener('click', callBackFn);
 };
 
-// Set the x, y and char values for the DOM elements
+// Set the char values for the DOM elements
 const setCells = function () {
   cellArr.forEach((cellObj) => {
     const cellEl = document.querySelector(

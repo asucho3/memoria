@@ -4,7 +4,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "powershell -ExecutionPolicy Bypass -File C:\\Users\\Alan\\AppData\\Roaming\\npm\\live-server.ps1"
   },
   "author": "",
   "license": "ISC"
